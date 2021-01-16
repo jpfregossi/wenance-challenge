@@ -10,10 +10,10 @@ Crear una carpeta nueva y clonar el repositorio:
  La api estará corriendo en http://localhost:8080
  
  Los endpoints son:
- 1) http://localhost:8080/btc/<timestamp>
- 2) http://localhost:8080/btc/average/<timestamp>/<timestamp>
+ 1) http://localhost:8080/btc/[timestamp]
+ 2) http://localhost:8080/btc/average/[timestamp]/[timestamp]
   
-  *<timestamp>* debe llevar la forma de AAAA-MM-DDTHH:MM:SS
+  *[timestamp]* debe llevar la forma de AAAA-MM-DDTHH:MM:SS
   
   Ejemplos:
   
