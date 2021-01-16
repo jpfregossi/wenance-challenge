@@ -1,9 +1,26 @@
 # Wenance Challenge
 
-# Instrucciones para correr la aplicación
+## Instrucciones para correr la aplicación
 
+Crear una carpeta nueva y clonar el repositorio: 
+ - git clone https://github.com/jpfregossi/wenance-challenge.git nombredelacarpeta
+ - cd nombredelacarpeta
+ - mvn spring-boot:run
+ 
+ La api estará corriendo en http://localhost:8080
+ 
+ Los endpoints son:
+ 1) http://localhost:8080/btc/<timestamp>
+ 2) http://localhost:8080/btc/average/<timestamp>/<timestamp>
+  
+  *<timestamp>* debe llevar la forma de AAAA-MM-DDTHH:MM:SS
+  
+  Ejemplos:
+  
+  curl http://localhost:8080/btc/2021-01-14T19:03:00
 
-
+  curl http://localhost:8080/btc/average/2021-01-14T19:03:00/2021-01-14T19:05:00
+  
 ## Consigna
 
 El objetivo de este pequeño ejercicio es demostrar la utilización del api de
@@ -29,14 +46,17 @@ Puntos extras si:
 
 # Solución Propuesta
 
-El framework elegido fue Webflux, ya que incorpora WebClient de una manera reactiva. 
+El framework elegido fue Webflux, ya que incorpora WebClient de una manera reactiva.
+
 Como se solicitaba el uso de la librería java.util.stream, opte por una estructura de datos con persistencia in-memory del tipo lista enlazada (ya que se trata de una serie temporal y las busquedas serán sequenciales), de atributos primitivos del tipo long (para el timestamp) y double para la cotización.
+
 Para hacer los requests a intervalos regulares de opté por el uso de Flux de una manera que no fuera bloqueante (a diferencia de la annotation @Scheduled).
 Este Flux es utilizado por TimeseriesRepo al suscribirse para alimentar los datos en memoria.
 Las queries son resueltas con la api solicitada.
 
 ## Consideraciones
-- Datos: Podría haberse optado por una base de datos in-memory al estilo de Redis (que posee estructuras especialmente diseñadas para series temporales) pero entonces carecería de sentido usar java.util.stream ya que se puede acceder de manera reactiva con sus propios operadores.
+- Podría haberse optado por una base de datos in-memory al estilo de Redis (que posee estructuras especialmente diseñadas para series temporales) pero entonces carecería de sentido usar java.util.stream ya que se puede acceder de manera reactiva con sus propios operadores.
+
 También es cuestionable el uso de lista enlazada, ya que si se deseara hacer uso de varios núcleos para resolver las queries, un arreglo sería una mejor opción.
 
 
