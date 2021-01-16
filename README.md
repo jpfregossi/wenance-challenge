@@ -55,9 +55,9 @@ Este Flux es utilizado por TimeseriesRepo, al suscribirse, para alimentar los da
 Las queries son resueltas con la api solicitada.
 
 ## Consideraciones
-- Podría haberse optado por una base de datos in-memory al estilo de Redis (que posee estructuras especialmente diseñadas para series temporales) pero entonces carecería de sentido usar java.util.stream ya que se puede acceder de manera reactiva con sus propios operadores. También el uso de java.util.stream podría ser reemplazado por la implementación propia de WebFlux de reactive streams.
+Podría haberse optado por una base de datos in-memory al estilo de Redis (que posee estructuras especialmente diseñadas para series temporales) pero entonces carecería de sentido usar java.util.stream ya que se puede acceder de manera reactiva con sus propios operadores. También el uso de java.util.stream podría ser reemplazado por la implementación propia de WebFlux de reactive streams.
 
 También es cuestionable el uso de lista enlazada, ya que si se deseara hacer uso de varios núcleos para resolver las queries, una lista simple sería una mejor opción.
 
-
+Se podría haber realizado una validación más sofisticada de los parámetros de los endpoints.
 
