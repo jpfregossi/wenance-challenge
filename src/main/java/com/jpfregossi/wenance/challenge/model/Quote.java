@@ -1,11 +1,5 @@
 package com.jpfregossi.wenance.challenge.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import java.util.Objects;
-
 public class Quote {
     private String lprice;
     private String curr1;
