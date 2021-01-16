@@ -48,16 +48,16 @@ Puntos extras si:
 
 El framework elegido fue Webflux, ya que incorpora WebClient de una manera reactiva.
 
-Como se solicitaba el uso de la librería java.util.stream, opte por una estructura de datos con persistencia in-memory del tipo lista enlazada (ya que se trata de una serie temporal y las busquedas serán sequenciales), de atributos primitivos del tipo long (para el timestamp) y double para la cotización.
+Entendiendo que el fin del challenge era demostrar el uso de java.util.stream, opte por una estructura de datos con persistencia in-memory del tipo lista enlazada (ya que se trata de una serie temporal y las busquedas serán sequenciales), de atributos primitivos del tipo long (para el timestamp) y double para la cotización para optimizar costos temporales y espaciales, sobre la que puede operar esta api.
 
 Para hacer los requests a intervalos regulares de opté por el uso de Flux de una manera que no fuera bloqueante (a diferencia de la annotation @Scheduled).
-Este Flux es utilizado por TimeseriesRepo al suscribirse para alimentar los datos en memoria.
+Este Flux es utilizado por TimeseriesRepo, al suscribirse, para alimentar los datos en memoria.
 Las queries son resueltas con la api solicitada.
 
 ## Consideraciones
-- Podría haberse optado por una base de datos in-memory al estilo de Redis (que posee estructuras especialmente diseñadas para series temporales) pero entonces carecería de sentido usar java.util.stream ya que se puede acceder de manera reactiva con sus propios operadores.
+- Podría haberse optado por una base de datos in-memory al estilo de Redis (que posee estructuras especialmente diseñadas para series temporales) pero entonces carecería de sentido usar java.util.stream ya que se puede acceder de manera reactiva con sus propios operadores. También el uso de java.util.stream podría ser reemplazado por la implementación propia de WebFlux de reactive streams.
 
-También es cuestionable el uso de lista enlazada, ya que si se deseara hacer uso de varios núcleos para resolver las queries, un arreglo sería una mejor opción.
+También es cuestionable el uso de lista enlazada, ya que si se deseara hacer uso de varios núcleos para resolver las queries, una lista simple sería una mejor opción.
 
 
 
